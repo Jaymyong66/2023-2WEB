@@ -7,10 +7,10 @@ const pool = mysql.createPool({
   database: "kwebdb1",
 });
 
-const runQuery = async (sql) => {
+const runQuery = async (sql, params) => {
   const conn = await pool.getConnection();
   try {
-    const [result] = await conn.query(sql);
+    const result = await conn.query(sql, params); // params를 전달하여 바인딩된 매개 변수 처리
     return result;
   } finally {
     conn.release();
